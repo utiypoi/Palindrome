@@ -1,0 +1,99 @@
+﻿<Window x:Class="Palindrome.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Palindrome"
+        mc:Ignorable="d" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Palindrome" Height="500" Width="800" Foreground="#588157"
+        ResizeMode="NoResize" Icon="/icon_app.png">
+    <Window.Resources>
+        <Storyboard x:Key="MenuOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="150"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="MainContainer">
+                <EasingThicknessKeyFrame KeyTime="0" Value="50,60,20,10"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="150,60,20,10"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MenuClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="150"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="60"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="MainContainer">
+                <EasingThicknessKeyFrame KeyTime="0" Value="150,60,20,10"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="50,60,20,10"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid Background="#dad7cd">
+        <Grid Height="60" VerticalAlignment="Top" Background="#a3b18a">
+            <TextBlock Text="Пословный палиндром" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontFamily="Roboto"/>
+        </Grid>
+        <Grid x:Name="GridMenu" Width="50" HorizontalAlignment="Left" Background="#588157">
+            <StackPanel>
+                <Grid Height="150" Background="#a3b18a">
+                    <Button x:Name="ButtonCloseMenu" Width="60" Height="60" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Collapsed" Click="ButtonCloseMenu_Click">
+                        <materialDesign:PackIcon Kind="ArrowLeft" Foreground="#588157" Width="25" Height="25"/>
+                    </Button>
+                    <Button x:Name="ButtonOpenMenu" Width="60" Height="60" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonOpenMenu_Click">
+                        <materialDesign:PackIcon Kind="Menu" Foreground="#588157" Width="25" Height="25"/>
+                    </Button>
+                </Grid>
+                <ListView Foreground="#a3b18a" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="BookOpenBlankVariantOutline" VerticalAlignment="Center" Margin="10"/>
+                            <TextBlock Text="Задание" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Info" VerticalAlignment="Center" Margin="10"/>
+                            <TextBlock Text="Справка" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ExitRun" VerticalAlignment="Center" Margin="10"/>
+                            <TextBlock Text="Выход" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="MainContainer" Margin="50,60,0,0">
+            <StackPanel Margin="20 20">
+                <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Pen" VerticalAlignment="Center" Margin="10"/>
+                        <TextBlock Text="Введите строку для проверки: " VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <TextBox Margin="10" materialDesign:HintAssist.Hint="Например: мир за мир"/>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="ArrowLeftRight" VerticalAlignment="Center" Margin="10"/>
+                    <TextBlock Text="Палиндром:" VerticalAlignment="Center"/>
+                </StackPanel>
+                <TextBox Margin="10" materialDesign:HintAssist.Hint="мир за мир" IsEnabled="False"/>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="ArrangeBringForward" VerticalAlignment="Center" Margin="10"/>
+                    <TextBlock Text="Результат: " VerticalAlignment="Center"/>
+                </StackPanel>
+                <TextBlock FontSize="13" HorizontalAlignment="Center" Text="Строка не является палиндромом"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
